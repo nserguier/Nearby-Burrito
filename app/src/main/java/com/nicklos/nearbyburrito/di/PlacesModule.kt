@@ -16,9 +16,6 @@ class PlacesModule {
 
     @Provides
     @Singleton
-    fun provideGeoDataClient(app: Application): GeoDataClient = Places.getGeoDataClient(app)
-
-    @Provides
-    @Singleton
-    fun providePlaceDetectionClient(app: Application): PlaceDetectionClient = Places.getPlaceDetectionClient(app)
+    fun providePlaceDetectionClient(app: Application): PlaceDetectionClient =
+            Places.getPlaceDetectionClient(app)
 }
