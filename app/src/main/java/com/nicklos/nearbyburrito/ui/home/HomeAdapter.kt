@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.nearby_burrito_item.view.*
  * Adapter for the home recycler view.
  * Populate recycler view with nearby burrito places.
  */
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val onPlaceClick: (Place) -> Unit) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     private val nearbyPlaces = mutableListOf<Place>()
 
@@ -28,12 +28,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     override fun getItemCount() = nearbyPlaces.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(nearbyPlaces[position])
+        holder.bind(nearbyPlaces[position], onPlaceClick)
     }
 
     class ViewHolder(private val rowView: View) : RecyclerView.ViewHolder(rowView) {
 
-        fun bind(place: Place) = with(rowView) {
+        fun bind(place: Place, onClick: (Place) -> Unit) = with(rowView) {
             place_name.text = place.name
             place_address.text = place.address
 
@@ -46,6 +46,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             place_rating.text =
                     if (rating < 0) resources.getString(R.string.star_rating_unknown)
                     else resources.getString(R.string.star_rating, String.format("%.1f", rating))
+
+            rowView.setOnClickListener { onClick(place) }
         }
     }
 

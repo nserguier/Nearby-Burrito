@@ -1,7 +1,7 @@
 package com.nicklos.nearbyburrito.di
 
-import com.google.android.gms.maps.MapFragment
 import com.nicklos.nearbyburrito.ui.home.HomeFragment
+import com.nicklos.nearbyburrito.ui.map.MapFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

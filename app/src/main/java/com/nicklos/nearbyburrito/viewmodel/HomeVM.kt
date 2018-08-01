@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.google.android.gms.location.places.Place
+import com.nicklos.nearbyburrito.ActionLiveData
 import com.nicklos.nearbyburrito.repo.PlacesRepository
 import com.nicklos.nearbyburrito.ui.home.HomeAdapter
 import javax.inject.Inject
@@ -15,7 +16,9 @@ class HomeVM @Inject constructor(private val repo: PlacesRepository) : ViewModel
     //Keep list of places as a live data to simplify updating on device rotation
     val places = MutableLiveData<List<Place>>()
 
-    val adapter = HomeAdapter()
+    val adapter = HomeAdapter { place -> onPlaceCliked.value = place }
+
+    val onPlaceCliked = ActionLiveData<Place>()
 
     init {
         findNearbyBurritos()
