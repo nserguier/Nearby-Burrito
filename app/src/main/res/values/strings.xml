@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Nearby Burrito</string>
+
+    <string name="pricing_free">Free</string>
+    <string name="pricing_unknown">no pricing details</string>
+    <string name="dot_separator">·</string>
+    <string name="star_rating">%1$s ★</string>
+    <string name="star_rating_unknown">no rating details</string>
 </resources>

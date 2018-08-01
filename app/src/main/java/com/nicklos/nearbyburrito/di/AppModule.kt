@@ -1,6 +1,7 @@
 package com.nicklos.nearbyburrito.di
 
-import com.google.android.gms.location.places.GeoDataClient
+import android.app.Application
+import android.support.v7.widget.LinearLayoutManager
 import com.google.android.gms.location.places.PlaceDetectionClient
 import com.nicklos.nearbyburrito.repo.DefaultPlacesRepository
 import com.nicklos.nearbyburrito.repo.PlacesRepository
@@ -21,4 +22,8 @@ class AppModule {
     @Singleton
     fun providePlacesRepository(placeClient: PlaceDetectionClient): PlacesRepository =
             DefaultPlacesRepository(placeClient)
+
+    @Provides
+    fun provideLayoutManager(app: Application): LinearLayoutManager =
+            LinearLayoutManager(app)
 }
