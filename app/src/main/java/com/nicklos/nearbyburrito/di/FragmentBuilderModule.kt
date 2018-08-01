@@ -1,5 +1,6 @@
 package com.nicklos.nearbyburrito.di
 
+import com.google.android.gms.maps.MapFragment
 import com.nicklos.nearbyburrito.ui.home.HomeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -12,5 +13,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
-    abstract fun homeFragment(): HomeFragment
+    abstract fun provideHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun provideMapFragment(): MapFragment
 }

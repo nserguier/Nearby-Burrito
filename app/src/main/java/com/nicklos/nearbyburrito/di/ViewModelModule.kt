@@ -3,6 +3,7 @@ package com.nicklos.nearbyburrito.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.nicklos.nearbyburrito.viewmodel.HomeVM
+import com.nicklos.nearbyburrito.viewmodel.MapVM
 import com.nicklos.nearbyburrito.viewmodel.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -19,6 +20,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeVM::class)
     internal abstract fun bindHomeVm(homeVm: HomeVM): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MapVM::class)
+    internal abstract fun bindMapVm(mapVm: MapVM): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

@@ -8,4 +8,9 @@
         android:name="com.nicklos.nearbyburrito.ui.home.HomeFragment"
         android:label="HomeFragment"/>
 
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.nicklos.nearbyburrito.ui.map.MapFragment"
+        android:label="MapFragment"/>
+
 </navigation>

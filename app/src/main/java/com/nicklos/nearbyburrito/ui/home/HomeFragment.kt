@@ -12,6 +12,9 @@ import com.nicklos.nearbyburrito.ui.BaseFragment
 import com.nicklos.nearbyburrito.viewmodel.HomeVM
 import javax.inject.Inject
 
+/**
+ * This fragment shows the list of nearby burrito places.
+ */
 class HomeFragment : BaseFragment<HomeVM>() {
 
     @Inject
