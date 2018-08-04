@@ -11,6 +11,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nicklos.nearbyburrito.R
 import com.nicklos.nearbyburrito.databinding.FragmentMapBinding
@@ -60,7 +62,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         //Show marker and center map at position
         homeVm.selectedPlace?.let {
             val position = it.latLng
-            map.addMarker(MarkerOptions().position(position).title(it.name.toString()))
+            val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.pin)
+            map.addMarker(MarkerOptions().position(position).title(it.name.toString()).icon(markerIcon))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16f))
         }
     }
