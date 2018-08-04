@@ -24,6 +24,14 @@
             tools:itemCount="4"
             tools:listitem="@layout/nearby_burrito_item"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:visibility="@{vm.progressVisibility}"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+
     </FrameLayout>
 
 </layout>
