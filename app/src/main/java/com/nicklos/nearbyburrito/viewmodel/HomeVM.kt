@@ -24,11 +24,10 @@ class HomeVM @Inject constructor(private val repo: PlacesRepository) : ViewModel
 
     val onPlaceClicked = ActionLiveData<Unit>()
 
-    init {
-        findNearbyBurritos()
-    }
+    fun findNearbyBurritos() {
+        //If we already have results, we keep them
+        if(places.value != null) return
 
-    private fun findNearbyBurritos() {
         repo.getCurrentPlace().addOnCompleteListener { task ->
             val responses = task.result
 
