@@ -1,11 +1,11 @@
 package com.nicklos.nearbyburrito.ui.map
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,18 +22,25 @@ import com.nicklos.nearbyburrito.viewmodel.MapVM
  * This fragment shows a google map view with the location
  * of the selected burrito place.
  */
-class MapFragment : BaseFragment<MapVM>(), OnMapReadyCallback {
+class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
 
+    private lateinit var mapVm: MapVM
     private lateinit var binding: FragmentMapBinding
 
-    override fun getViewModel() = MapVM::class.java
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mapVm = ViewModelProviders.of(this, viewModelFactory).get(MapVM::class.java)
+
+        mapVm.start(homeVm)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
         binding.setLifecycleOwner(this)
-        binding.vm = viewModel
+        binding.vm = mapVm
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)

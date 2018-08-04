@@ -11,26 +11,23 @@ import androidx.navigation.Navigation
 import com.nicklos.nearbyburrito.R
 import com.nicklos.nearbyburrito.databinding.FragmentHomeBinding
 import com.nicklos.nearbyburrito.ui.BaseFragment
-import com.nicklos.nearbyburrito.viewmodel.HomeVM
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 /**
  * This fragment shows the list of nearby burrito places.
  */
-class HomeFragment : BaseFragment<HomeVM>() {
+class HomeFragment : BaseFragment() {
 
     @Inject
     lateinit var layoutManager: LinearLayoutManager
 
     private lateinit var binding: FragmentHomeBinding
 
-    override fun getViewModel() = HomeVM::class.java
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.onPlaceCliked.observe(this, Observer { place ->
+        homeVm.onPlaceClicked.observe(this, Observer {
             Navigation.findNavController(home_root).navigate(R.id.action_home_to_map)
         })
     }
@@ -38,7 +35,7 @@ class HomeFragment : BaseFragment<HomeVM>() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.setLifecycleOwner(this)
-        binding.vm = viewModel
+        binding.vm = homeVm
         binding.burritoRecycler.layoutManager = layoutManager
         return binding.root
     }

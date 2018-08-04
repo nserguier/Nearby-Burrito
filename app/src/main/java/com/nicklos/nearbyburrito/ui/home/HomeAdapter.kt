@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.location.places.Place
 import com.nicklos.nearbyburrito.R
+import com.nicklos.nearbyburrito.util.getPricingString
+import com.nicklos.nearbyburrito.util.getRatingString
 import kotlinx.android.synthetic.main.nearby_burrito_item.view.*
 
 /**
@@ -36,16 +38,8 @@ class HomeAdapter(private val onPlaceClick: (Place) -> Unit) : RecyclerView.Adap
         fun bind(place: Place, onClick: (Place) -> Unit) = with(rowView) {
             place_name.text = place.name
             place_address.text = place.address
-
-            val priceLevel = place.priceLevel
-            place_pricing.text =
-                    if (priceLevel < 0) resources.getString(R.string.pricing_unknown)
-                    else resources.getStringArray(R.array.pricing)[priceLevel]
-
-            val rating = place.rating
-            place_rating.text =
-                    if (rating < 0) resources.getString(R.string.star_rating_unknown)
-                    else resources.getString(R.string.star_rating, String.format("%.1f", rating))
+            place_pricing.text = resources.getPricingString(place.priceLevel)
+            place_rating.text = resources.getRatingString(place.rating)
 
             rowView.setOnClickListener { onClick(place) }
         }
