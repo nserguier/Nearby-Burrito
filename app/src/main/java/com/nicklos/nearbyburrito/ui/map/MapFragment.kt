@@ -36,8 +36,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             start(homeVm)
         }
 
-        //Set action bar title
-        (activity as? AppCompatActivity)?.supportActionBar?.title = homeVm.selectedPlace?.name
+        //Set action bar title and up navigation
+        (activity as? AppCompatActivity)?.supportActionBar?.let {
+            it.title = homeVm.selectedPlace?.name
+            it.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import androidx.navigation.Navigation
 import com.nicklos.nearbyburrito.R
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
@@ -36,4 +37,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             //todo react on permission granted, show nothing otherwise
         }
     }
+
+    override fun onSupportNavigateUp() =
+            Navigation.findNavController(this, R.id.main_root).navigateUp()
 }
