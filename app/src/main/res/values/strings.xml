@@ -6,4 +6,5 @@
     <string name="dot_separator">·</string>
     <string name="star_rating">%1$s ★</string>
     <string name="star_rating_unknown">no rating details</string>
+    <string name="burrito_places">Burrito Places</string>
 </resources>

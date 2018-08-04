@@ -39,5 +39,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     override fun onSupportNavigateUp() =
-            Navigation.findNavController(this, R.id.main_root).navigateUp()
+            Navigation.findNavController(this, R.id.my_nav_host_fragment).navigateUp()
 }

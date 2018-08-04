@@ -3,6 +3,7 @@ package com.nicklos.nearbyburrito.ui.home
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +13,11 @@ import com.nicklos.nearbyburrito.R
 import com.nicklos.nearbyburrito.databinding.FragmentHomeBinding
 import com.nicklos.nearbyburrito.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
-import javax.inject.Inject
 
 /**
  * This fragment shows the list of nearby burrito places.
  */
 class HomeFragment : BaseFragment() {
-
-    @Inject
-    lateinit var layoutManager: LinearLayoutManager
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -36,7 +33,17 @@ class HomeFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.setLifecycleOwner(this)
         binding.vm = homeVm
-        binding.burritoRecycler.layoutManager = layoutManager
+        binding.burritoRecycler.layoutManager = LinearLayoutManager(context)
+
+        resetActionBar()
+
         return binding.root
+    }
+
+    private fun resetActionBar() {
+        (activity as? AppCompatActivity)?.supportActionBar?.let {
+            it.title = getString(R.string.burrito_places)
+            it.setDisplayHomeAsUpEnabled(false)
+        }
     }
 }
