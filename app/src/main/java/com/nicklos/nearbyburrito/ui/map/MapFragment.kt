@@ -3,6 +3,7 @@ package com.nicklos.nearbyburrito.ui.map
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nicklos.nearbyburrito.R
 import com.nicklos.nearbyburrito.databinding.FragmentMapBinding
@@ -32,9 +32,12 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mapVm = ViewModelProviders.of(this, viewModelFactory).get(MapVM::class.java)
+        mapVm = ViewModelProviders.of(this, viewModelFactory).get(MapVM::class.java).apply {
+            start(homeVm)
+        }
 
-        mapVm.start(homeVm)
+        //Set action bar title
+        (activity as? AppCompatActivity)?.supportActionBar?.title = homeVm.selectedPlace?.name
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,8 +54,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //Show marker and center map at position
+        homeVm.selectedPlace?.let {
+            val position = it.latLng
+            map.addMarker(MarkerOptions().position(position).title(it.name.toString()))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16f))
+        }
     }
 }
